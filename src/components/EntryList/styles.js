@@ -3,35 +3,63 @@ import Colors from '../../styles/Colors';
 
 export const Container = styled.View`
   padding: 15px;
-  background-color: #ccc;
   border-radius: 4px;
-  margin: 5px 15px 0 15px;
+  margin: 5px 15px 15px 15px;
   align-self: center;
   width: 95%;
-  background-color: ${Colors.dark};
+  background-color: ${Colors.white};
 `;
 
 export const Title = styled.Text`
-  font-size: 18px;
-  font-weight: bold;
-  color: #fff;
+  font-size: 16px;
+  color: ${Colors.dark};
   margin-bottom: 10px;
 `;
 
 export const List = styled.FlatList``;
 
-export const ItemList = styled.View`
+export const ItemList = styled.TouchableOpacity`
   flex-direction: row;
+  margin-top: 10px;
+`;
+
+export const PointBox = styled.View`
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const ItemListBox = styled.View`
+  padding-left: 20px;
+  justify-content: center;
+  flex: 1;
 `;
 
 export const ItemListLabel = styled.Text`
-  margin-right: 10px;
-  color: #fff;
+  color: ${Colors.dark};
 `;
 
-export const EditButton = styled.TouchableOpacity``;
+export const ItemListBotton = styled.View`
+  flex-direction: row;
+  align-items: center;
+`;
 
-export const EditButtonTittle = styled.Text``;
+export const ItemListBottonLabel = styled.Text`
+  margin-left: 8px;
+  margin-right: 10px;
+  color: ${Colors.metal};
+`;
+
+export const ItemListValueBox = styled.View`
+  align-items: center;
+  justify-content: center;
+`;
+
+export const ItemListValue = styled.Text`
+  font-size: 18px;
+  color: ${Colors.background};
+  font-weight: bold;
+`;
 
 export const Botton = styled.View`
   flex-direction: row;
@@ -39,8 +67,12 @@ export const Botton = styled.View`
   margin-top: 10px;
 `;
 
-export const ButtonBotton = styled.TouchableOpacity``;
+export const ButtonBotton = styled.TouchableOpacity`
+  flex-direction: row;
+  align-items: center;
+`;
 
 export const Label = styled.Text`
-  color: ${Colors.light};
+  color: ${Colors.background};
+  margin-left: 5px;
 `;

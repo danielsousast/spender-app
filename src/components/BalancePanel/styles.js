@@ -2,13 +2,11 @@ import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
 import Colors from '../../styles/Colors';
 
-export const Container = styled(LinearGradient).attrs({
-  colors: [Colors.blue, Colors.turquese],
-})`
+export const Container = styled.View`
   justify-content: center;
   align-items: center;
   height: 150px;
-  background-color: #ccc;
+  background-color: ${Colors.turquese};
   margin-bottom: 5px;
 `;
 

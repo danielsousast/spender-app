@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
-import {saveEntry, removeEntry} from '../../services/Entries';
+import {updateEntry} from '../../services/Entries';
 import EntryInput from '../../components/EntryInput';
 import CategoryModal from '../../components/CategoryModal';
+
 import {
   Container,
   Content,
@@ -20,12 +21,12 @@ import {
   MenuItemLabel,
 } from './styles';
 
-export default function NewEntry({navigation, route}) {
-  const [amount, setAmount] = useState(0);
+export default function EditEntry({navigation, route}) {
+  const entry = route.params && route.params.entry;
+  const [amount, setAmount] = useState(entry.amount);
   const [category, setCategory] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
-  const [isDebit, setIsDebit] = useState(false);
-  const [activeTab, setActivetab] = useState(1);
+  const [activeTab, setActivetab] = useState(entry.amount < 0 && 1);
 
   function isValid() {
     if (parseFloat(amount) !== 0) {
@@ -40,7 +41,7 @@ export default function NewEntry({navigation, route}) {
       amount: amountData,
       category,
     };
-    saveEntry(data);
+    updateEntry(data);
     goBack();
   }
 
@@ -51,11 +52,6 @@ export default function NewEntry({navigation, route}) {
   function changeCategory(param) {
     setCategory(param);
     setModalVisible(false);
-  }
-
-  function changeDebit(param) {
-    setIsDebit(param);
-    console.log(isDebit);
   }
 
   return (
@@ -74,11 +70,7 @@ export default function NewEntry({navigation, route}) {
       </HeaderMenu>
       <Content>
         <InputBox>
-          <EntryInput
-            value={amount}
-            onChangeText={(e) => setAmount(e)}
-            changeDebit={changeDebit}
-          />
+          <EntryInput value={amount} onChangeText={(e) => setAmount(e)} />
           <CategoryButton onPress={() => setModalVisible(true)}>
             <CategoryButtonTitle>
               {category.name || 'Categoria'}
@@ -95,7 +87,7 @@ export default function NewEntry({navigation, route}) {
         </ButtonsBox>
         <ButtonsBox>
           <AddButton onPress={handleSave} active={activeTab}>
-            <AddButtonTittle>Adicionar</AddButtonTittle>
+            <AddButtonTittle>Salvar</AddButtonTittle>
           </AddButton>
           <CancelButton onPress={goBack}>
             <CancelButtonTittle active={activeTab}>Cancelar</CancelButtonTittle>

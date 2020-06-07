@@ -15,7 +15,7 @@ const Colors = {
   orangeDark: '#d35400',
   red: '#f37272',
   redDark: '#c0392b',
-  champagne: '#ecf0f1',
+  champagne: '#f4f4f4',
   champagneDark: '#bdc3c7',
   metal: '#95a5a6',
   metalDark: '#7f8c8d',

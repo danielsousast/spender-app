@@ -9,16 +9,16 @@ export async function getEntries() {
   return entries;
 }
 
-export async function saveEntry(value, entry = {}) {
+export async function saveEntry(value) {
   const realm = await getRealm();
   let data = {};
 
   try {
     realm.write(function () {
       data = {
-        id: value.id || entry.id || String(Math.random()),
-        amount: value.amount || entry.amount,
-        entryAt: value.entryAt || entry.entryAt,
+        id: value.id || String(Math.random()),
+        amount: value.amount,
+        entryAt: value.entryAt || new Date(),
         isInit: false,
       };
 
@@ -26,6 +26,29 @@ export async function saveEntry(value, entry = {}) {
     });
 
     console.log(data);
+
+    return data;
+  } catch (error) {
+    console.log(error);
+    Alert.alert('Erro', 'Verifique seus dados');
+  }
+}
+
+export async function updateEntry(entry) {
+  const realm = await getRealm();
+  let data = {};
+
+  try {
+    realm.write(function () {
+      data = {
+        id: entry.id,
+        amount: entry.amount,
+        entryAt: entry.entryAt,
+        isInit: false,
+      };
+
+      realm.create('Entry', data, true);
+    });
 
     return data;
   } catch (error) {

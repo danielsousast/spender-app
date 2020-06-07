@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import {
   Container,
   Title,
@@ -8,10 +9,15 @@ import {
   Label,
   ButtonBotton,
   ItemList,
-  EditButton,
-  EditButtonTittle,
+  PointBox,
+  ItemListBox,
+  ItemListValueBox,
+  ItemListValue,
+  ItemListBotton,
+  ItemListBottonLabel,
 } from './styles';
 import {getEntries} from '../../services/Entries';
+import Colors from '../../styles/Colors';
 
 export default function SumaryList(props) {
   const [entries, setEntries] = useState([]);
@@ -32,11 +38,24 @@ export default function SumaryList(props) {
       <List
         data={entries}
         renderItem={({item}) => (
-          <ItemList>
-            <ItemListLabel>{String(item.amount)}</ItemListLabel>
-            <EditButton onPress={() => props.editAction(item)}>
-              <EditButtonTittle>Edit</EditButtonTittle>
-            </EditButton>
+          <ItemList
+            activeOpacity={0.6}
+            onPress={() => props.onEntryPress(item)}>
+            <PointBox>
+              <Icon name="history" size={20} />
+            </PointBox>
+            <ItemListBox>
+              <ItemListLabel> Padaria Super pão </ItemListLabel>
+              <ItemListBotton>
+                <Icon name="access-time" color={Colors.metal} />
+                <ItemListBottonLabel>Dia 12</ItemListBottonLabel>
+                <Icon name="person-pin" color={Colors.metal} />
+                <ItemListBottonLabel>Localização</ItemListBottonLabel>
+              </ItemListBotton>
+            </ItemListBox>
+            <ItemListValueBox>
+              <ItemListValue>R$ {String(item.amount)}</ItemListValue>
+            </ItemListValueBox>
           </ItemList>
         )}
         keyExtractor={(item) => item.id}
@@ -44,6 +63,7 @@ export default function SumaryList(props) {
       <Botton>
         <Label>Ultimos 7 dias</Label>
         <ButtonBotton>
+          <Icon name="insert-chart" color={Colors.metalDark} size={20} />
           <Label>Ver mais</Label>
         </ButtonBotton>
       </Botton>
